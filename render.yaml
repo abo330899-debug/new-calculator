@@ -1,0 +1,26 @@
+# render.yaml
+services:
+  - type: web
+    name: star-packe
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: DATABASE_URL
+        fromDatabase:
+          name: star-packe-db
+          property: connectionString
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: AI_INTEGRATIONS_OPENAI_API_KEY
+        sync: false
+      - key: AI_INTEGRATIONS_OPENAI_BASE_URL
+        sync: false
+
+databases:
+  - name: star-packe-db
+    plan: free
