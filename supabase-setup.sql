@@ -1,33 +1,24 @@
--- =============================================
--- حاسبة الرسوم الكمركية العراقية — إعداد قاعدة البيانات
--- شغّل هذا الكود في Supabase SQL Editor
--- =============================================
-
--- جدول المستخدمين
 CREATE TABLE IF NOT EXISTS users (
-  id VARCHAR PRIMARY KEY DEFAULT gen_random_uuid()::text,
+  id TEXT PRIMARY KEY DEFAULT gen_random_uuid()::text,
   username TEXT NOT NULL UNIQUE,
   password TEXT NOT NULL
 );
 
--- جدول نقاط التفتيش
 CREATE TABLE IF NOT EXISTS checkpoints (
   id TEXT PRIMARY KEY,
   name TEXT NOT NULL
 );
 
--- جدول رسوم نقاط التفتيش
 CREATE TABLE IF NOT EXISTS checkpoint_fees (
-  id SERIAL PRIMARY KEY,
+  id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   checkpoint_id TEXT NOT NULL,
   code TEXT NOT NULL,
   label TEXT,
   amount_iqd REAL NOT NULL DEFAULT 0
 );
 
--- جدول المنتجات
 CREATE TABLE IF NOT EXISTS products (
-  id SERIAL PRIMARY KEY,
+  id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   hs_code TEXT NOT NULL,
   cst_code TEXT,
   description TEXT,
@@ -49,28 +40,24 @@ CREATE TABLE IF NOT EXISTS products (
   raw_json TEXT
 );
 
--- الفهارس لتسريع البحث
 CREATE INDEX IF NOT EXISTS idx_products_hs ON products(hs_code);
 CREATE INDEX IF NOT EXISTS idx_products_desc ON products(description);
 
--- جدول الجلسات (مطلوب لتسجيل الدخول)
 CREATE TABLE IF NOT EXISTS session (
-  sid VARCHAR NOT NULL PRIMARY KEY,
+  sid TEXT NOT NULL PRIMARY KEY,
   sess JSON NOT NULL,
   expire TIMESTAMP(6) NOT NULL
 );
+
 CREATE INDEX IF NOT EXISTS IDX_session_expire ON session(expire);
 
--- =============================================
--- بيانات نقاط التفتيش الأولية
--- =============================================
 INSERT INTO checkpoints (id, name) VALUES
-  ('umkasr', 'منفذ أم قصر'),
-  ('shalamja', 'منفذ شلمجة'),
-  ('mandali', 'منفذ منذلي'),
-  ('trebil', 'منفذ طريبيل'),
-  ('fishkhabur', 'منفذ فيشخابور'),
-  ('ibrahim_khalil', 'منفذ إبراهيم الخليل'),
-  ('rabiya', 'منفذ ربيعة'),
-  ('zurbatia', 'منفذ زرباطية')
+  ('umkasr', 'Um Qasr'),
+  ('shalamja', 'Shalamja'),
+  ('mandali', 'Mandali'),
+  ('trebil', 'Trebil'),
+  ('fishkhabur', 'Fish Khabur'),
+  ('ibrahim_khalil', 'Ibrahim Khalil'),
+  ('rabiya', 'Rabiya'),
+  ('zurbatia', 'Zurbatia')
 ON CONFLICT (id) DO NOTHING;
