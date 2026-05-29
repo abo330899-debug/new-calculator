@@ -178,7 +178,7 @@ export default function Home() {
           <div className="relative shrink-0 float-slow" style={{ animationDelay: "1s" }}>
             <div className="absolute inset-0 bg-primary/20 rounded-full blur-2xl scale-150 animate-pulse" />
             <div className="relative w-20 h-20 flex items-center justify-center rounded-2xl bg-white/10 dark:bg-white/5 backdrop-blur-sm border border-white/20 dark:border-white/10 shadow-xl">
-              <Shield className="w-14 h-14 text-primary" data-testid="img-logo-home" />
+              <img src="/logo.png" alt="الكمارك العراقية" className="w-14 h-14 object-contain" data-testid="img-logo-home" />
             </div>
           </div>
 
