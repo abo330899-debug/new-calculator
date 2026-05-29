@@ -3,7 +3,7 @@ services:
     name: customs-calculator
     env: node
     plan: free
-    buildCommand: npm install && npm run build
+    buildCommand: npm install --include=dev && node node_modules/.bin/tsx script/build.ts
     startCommand: npm start
     autoDeploy: true
     envVars:
@@ -19,5 +19,3 @@ services:
         sync: false
       - key: ALLOWED_ORIGINS
         sync: false
-      - key: NODE_VERSION
-        value: 20.19.2
