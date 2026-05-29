@@ -206,13 +206,13 @@ export default function SearchPage() {
 
   const isSearching = debouncedQuery.length >= 2;
 
-  const { data: searchResults, isLoading: searchLoading } = useQuery<Product[]>({
+  const { data: searchResults, isLoading: searchLoading, isError: searchError } = useQuery<Product[]>({
     queryKey: [`/api/search?q=${encodeURIComponent(debouncedQuery)}&limit=50`],
     enabled: isSearching,
     staleTime: 30000,
   });
 
-  const { data: browseData, isLoading: browseLoading } = useQuery<ProductsResponse>({
+  const { data: browseData, isLoading: browseLoading, isError: browseError } = useQuery<ProductsResponse>({
     queryKey: [`/api/products?page=${page}&limit=50`],
     enabled: !isSearching,
     staleTime: 60000,
@@ -220,6 +220,7 @@ export default function SearchPage() {
 
   const displayProducts = isSearching ? (searchResults || []) : (browseData?.products || []);
   const isLoading = isSearching ? searchLoading : browseLoading;
+  const isError = isSearching ? searchError : browseError;
   const totalPages = browseData?.total_pages || 1;
   const totalCount = browseData?.total_count || 0;
 
@@ -614,7 +615,23 @@ export default function SearchPage() {
         </Card>
       )}
 
-      {!isLoading && displayProducts.length === 0 && isSearching && (
+      {!isLoading && isError && (
+        <Card>
+          <CardContent className="p-8 text-center">
+            <AlertTriangle className="h-10 w-10 mx-auto text-red-500 mb-3" />
+            <p className="text-muted-foreground font-medium mb-1">تعذر تحميل البيانات</p>
+            <p className="text-sm text-muted-foreground">تأكد من الاتصال بالإنترنت أو حاول مرة أخرى</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="mt-3 text-sm text-primary underline underline-offset-2"
+            >
+              إعادة المحاولة
+            </button>
+          </CardContent>
+        </Card>
+      )}
+
+      {!isLoading && !isError && displayProducts.length === 0 && isSearching && (
         <Card>
           <CardContent className="p-8 text-center">
             <Package className="h-10 w-10 mx-auto text-muted-foreground mb-3" />
