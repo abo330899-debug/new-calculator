@@ -3,7 +3,7 @@ services:
     name: customs-calculator
     env: node
     plan: free
-    buildCommand: npm install && npm run build
+    buildCommand: npm install && node node_modules/.bin/tsx script/build.ts
     startCommand: npm start
     autoDeploy: true
     envVars:
