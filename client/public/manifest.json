@@ -1,0 +1,48 @@
+{
+  "name": "الحاسبة الكمركية العراقية",
+  "short_name": "كمارك العراق",
+  "description": "نظام حساب الرسوم الكمركية في العراق",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0c1018",
+  "theme_color": "#0c1018",
+  "orientation": "portrait",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "apple touch icon"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "الحاسبة",
+      "url": "/calculator",
+      "description": "احسب الرسوم الكمركية"
+    },
+    {
+      "name": "بحث المنتجات",
+      "url": "/search",
+      "description": "ابحث بكود HS"
+    },
+    {
+      "name": "قراءة المنفست",
+      "url": "/manifest",
+      "description": "استخرج بيانات المنفست"
+    }
+  ]
+}
