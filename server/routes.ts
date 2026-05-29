@@ -742,6 +742,8 @@ If a field is not visible or unclear, use reasonable defaults (empty string for 
       let ocrText = "";
       try {
         ocrText = await tesseract.recognize(tmpFile, { lang: "ara+eng", oem: 1, psm: 6 });
+      } catch {
+        // tesseract not available — continue with empty text, OpenAI will handle visually
       } finally {
         try { fs.unlinkSync(tmpFile); } catch {}
       }
@@ -861,12 +863,10 @@ If a field is not visible or unclear, use reasonable defaults (empty string for 
           oem: 1,
           psm: 6,
         });
+      } catch {
+        // tesseract not available — OpenAI will process the image visually
       } finally {
         try { fs.unlinkSync(tmpFile); } catch {}
-      }
-
-      if (!ocrText || ocrText.trim().length < 10) {
-        return res.status(422).json({ error: "لم يتمكن OCR من قراءة النص من الصورة. حاول صورة أوضح." });
       }
 
       // Convert Arabic-Indic digits to Latin
