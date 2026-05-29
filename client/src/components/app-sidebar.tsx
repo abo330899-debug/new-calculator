@@ -46,11 +46,7 @@ export function AppSidebar({ className }: { className?: string }) {
           <div className="relative shrink-0">
             <div className="absolute inset-0 bg-primary/20 rounded-xl blur-md scale-110" />
             <div className="relative w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20">
-              <Calculator
-                className="h-6 w-6 text-primary"
-                aria-label="الكمارك العراقية"
-                data-testid="img-logo-sidebar"
-              />
+              <ShieldCheck className="h-6 w-6 text-primary" data-testid="img-logo-sidebar" />
             </div>
           </div>
           <div className="flex flex-col overflow-hidden group-data-[collapsible=icon]:hidden">
