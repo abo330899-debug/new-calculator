@@ -3,7 +3,6 @@ services:
     name: customs-calculator
     env: node
     plan: free
-    rootDir: customs-calculator
     buildCommand: npm install && npm run build
     startCommand: npm start
     autoDeploy: true
