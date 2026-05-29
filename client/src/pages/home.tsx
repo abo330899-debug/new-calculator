@@ -17,7 +17,6 @@ import {
   ChevronLeft,
 } from "lucide-react";
 import { useLocation } from "wouter";
-import logoImg from "@assets/IMG_2293_1770690757765.png";
 
 type StatsData = {
   rows_total: number;
@@ -179,10 +178,9 @@ export default function Home() {
           <div className="relative shrink-0 float-slow" style={{ animationDelay: "1s" }}>
             <div className="absolute inset-0 bg-primary/20 rounded-full blur-2xl scale-150 animate-pulse" />
             <div className="relative w-20 h-20 flex items-center justify-center rounded-2xl bg-white/10 dark:bg-white/5 backdrop-blur-sm border border-white/20 dark:border-white/10 shadow-xl">
-              <img
-                src={logoImg}
-                alt="الكمارك العراقية"
-                className="w-14 h-14 object-contain"
+              <Calculator
+                className="w-14 h-14 text-primary"
+                aria-label="الكمارك العراقية"
                 data-testid="img-logo-home"
               />
             </div>
@@ -291,83 +289,6 @@ export default function Home() {
           variant="default"
           testId="card-go-tariff"
         />
-      </div>
-
-      {/* ── Checkpoints + How it works ───────── */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {/* Checkpoints */}
-        <Card className="premium-card">
-          <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-bold flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-500/10">
-                <MapPin className="h-3.5 w-3.5 text-emerald-500" />
-              </div>
-              المنافذ الحدودية المتاحة
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="pt-0">
-            {cpLoading ? (
-              <div className="space-y-2">
-                {[1,2,3].map(i => <Skeleton key={i} className="h-10 w-full rounded-xl" />)}
-              </div>
-            ) : (
-              <div className="space-y-2">
-                {checkpoints?.map((cp, idx) => (
-                  <div
-                    key={cp.id}
-                    className="flex items-center justify-between gap-3 p-3 rounded-xl bg-muted/40 dark:bg-muted/20 hover:bg-muted/60 dark:hover:bg-muted/30 transition-colors border border-transparent hover:border-border/50"
-                    data-testid={`checkpoint-${cp.id}`}
-                    style={{ animationDelay: `${idx * 0.05}s` }}
-                  >
-                    <div className="flex items-center gap-2 min-w-0">
-                      <div className="h-2 w-2 rounded-full bg-emerald-500 shrink-0 shadow-[0_0_6px_0_hsl(160_70%_50%/0.6)]" />
-                      <span className="text-sm font-medium truncate">{cp.name}</span>
-                    </div>
-                    <Badge variant="secondary" className="shrink-0 text-[10px] font-bold tabular-nums">
-                      {cp.fees.length} رسوم
-                    </Badge>
-                  </div>
-                ))}
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        {/* How it works */}
-        <Card className="premium-card">
-          <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-bold flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary/10">
-                <Zap className="h-3.5 w-3.5 text-primary" />
-              </div>
-              كيف يعمل النظام
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="pt-0">
-            <div className="space-y-4">
-              {[
-                { icon: Search, title: "ابحث عن المنتج", desc: "ابحث برمز HS أو الوصف العربي", step: "١", color: "text-blue-500 dark:text-blue-400", bg: "bg-blue-500/10" },
-                { icon: Calculator, title: "أدخل بيانات الشحنة", desc: "الكمية، القيمة، نسبة الرسم", step: "٢", color: "text-amber-500 dark:text-amber-400", bg: "bg-amber-500/10" },
-                { icon: TrendingUp, title: "احصل على النتيجة فوراً", desc: "فرق الرسم بالدولار والدينار", step: "٣", color: "text-emerald-500 dark:text-emerald-400", bg: "bg-emerald-500/10" },
-              ].map((item, i) => (
-                <div key={i} className="flex items-center gap-4 group">
-                  <div className="relative shrink-0">
-                    <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${item.bg} transition-transform duration-200 group-hover:scale-110`}>
-                      <item.icon className={`h-4 w-4 ${item.color}`} />
-                    </div>
-                    <span className="absolute -top-1.5 -right-1.5 flex h-5 w-5 items-center justify-center rounded-full gradient-gold text-white text-[10px] font-black shadow">
-                      {item.step}
-                    </span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h4 className="text-sm font-bold">{item.title}</h4>
-                    <p className="text-xs text-muted-foreground mt-0.5">{item.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </div>
   );
