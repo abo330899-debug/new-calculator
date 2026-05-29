@@ -17,7 +17,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import logoImg from "@assets/IMG_2293_1770690757765.png";
 
 const loginSchema = z.object({
   username: z.string().min(2, "اسم المستخدم يجب أن يكون حرفين على الأقل"),
@@ -80,12 +79,9 @@ export default function Login() {
           <div className="flex justify-center mb-4">
             <div className="relative">
               <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl scale-150" />
-              <img
-                src={logoImg}
-                alt="الكمارك العراقية"
-                className="h-20 w-auto object-contain relative z-10"
-                data-testid="img-logo-login"
-              />
+              <div className="h-20 w-20 rounded-full gradient-gold flex items-center justify-center relative z-10">
+                <Shield className="h-10 w-10 text-white" />
+              </div>
             </div>
           </div>
           <h1 className="text-2xl font-bold text-gradient-gold" data-testid="text-login-title">
